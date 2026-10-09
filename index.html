@@ -1,29 +1,208 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101311">
-  <meta name="description" content="RUNMATE — اكتشف جريات قريبة، احجز مكانك، والتقِ بأصدقاء الجري."><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml">
-  <title>RUNMATE — اجري مع ناسك</title><link rel="preconnect" href="https://images.unsplash.com"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<div class="app-shell">
-  <aside class="sidebar"><a class="brand" href="#home" aria-label="RUNMATE home"><span class="brand-mark">R</span><span>RUNMATE<span class="brand-dot">.</span></span></a><div class="side-label" data-i="menu">القائمة</div><nav class="side-nav" aria-label="Main navigation"><button class="nav-item active" data-page="home"><span>⌂</span><b data-i="home">الرئيسية</b></button><button class="nav-item" data-page="explore"><span>⌕</span><b data-i="explore">اكتشف</b></button><button class="nav-item" data-page="tickets"><span>▣</span><b data-i="tickets">تذاكري</b><i class="nav-count" id="ticket-count">0</i></button><button class="nav-item" data-page="chats"><span>▤</span><b data-i="chats">المحادثات</b></button><button class="nav-item" data-page="profile"><span>◉</span><b data-i="profile">حسابي</b></button></nav><div class="sidebar-bottom"><div class="weather-card"><div class="sun">☀</div><div><small data-i="weather">الجو في القاهرة</small><strong>24° <small>— مثالي للجري</small></strong></div></div><button class="language-btn" id="language-btn">◎ <span>English</span></button><div class="side-user"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces" alt=""><div><b data-i="runner">سارة أحمد</b><small>عضوة منذ 2024</small></div><button class="dots">···</button></div></div></aside>
-  <main class="main"><header class="topbar"><button class="mobile-brand" data-page="home"><span class="brand-mark">R</span> RUNMATE<span class="brand-dot">.</span></button><div class="crumb"><span data-i="discover">اكتشفي جريات جديدة</span><span class="crumb-slash">/</span><span id="crumb-active" data-i="home">الرئيسية</span></div><div class="top-actions"><button class="icon-btn notification-btn" aria-label="Notifications">♧<i></i></button><button class="top-avatar" data-page="profile"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces" alt="Profile"></button></div></header>
-  <section class="page active" id="page-home"><div class="welcome-row"><div><p class="eyebrow"><span class="live-dot"></span><span data-i="goodmorning">صباح النشاط، سارة</span></p><h1 data-i="welcome">جاهزة لجريتك الجاية؟</h1><p class="subline" data-i="subtitle">صحاب جدد، طرق حلوة، وخطوة أقرب لهدفك.</p></div><button class="primary-btn create-run" data-page="organizer"><span>＋</span><span data-i="create">نظّمي جَرية</span></button></div>
-    <div class="hero"><img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1600&auto=format&fit=crop&q=85" alt="Runners jogging together along a waterfront"><div class="hero-shade"></div><div class="hero-tag"><span class="live-dot"></span><span data-i="featured">اختيار الأسبوع</span></div><div class="hero-content"><div class="hero-kicker" data-i="featured-run">جَرية مميزة · القاهرة</div><h2 data-i="hero-title">على النيل<br>الصبح أحلى.</h2><p data-i="hero-desc">ابدئي يومك بخطوات هادية على الكورنيش.</p><div class="hero-meta"><span>◷ <b>الجمعة، ١٧ أكتوبر</b> · ٦:٣٠ ص</span><span>↗ <b>٥ كم</b></span><span>◎ <b>مبتدئة</b></span></div><button class="hero-button" data-event="e1"><span data-i="discover-run">اكتشفي الجَرية</span><span>↙</span></button></div><div class="hero-pagination"><i class="selected"></i><i></i><i></i></div></div>
-    <div class="stats-row"><div class="stat"><span class="stat-icon lime-icon">↗</span><div><small data-i="nearby-runs">جريات قريبة</small><strong><em>12</em> <small data-i="this-week">هذا الأسبوع</small></strong></div></div><div class="stat"><span class="stat-icon">◎</span><div><small data-i="community">مجتمع RUNMATE</small><strong><em>2.4k</em> <small data-i="active-runners">عدّاء نشط</small></strong></div></div><div class="stat"><span class="stat-icon">⌖</span><div><small data-i="your-area">منطقتك</small><strong>المعادي، القاهرة</strong></div></div></div>
-    <div class="section-heading"><div><p class="eyebrow" data-i="curated">مختارة ليكي</p><h2 data-i="upcoming">جريات جاية <span class="heading-count">04</span></h2></div><button class="text-link" data-page="explore"><span data-i="all-runs">كل الجريات</span> <span>←</span></button></div>
-    <div class="run-grid" id="home-runs"></div>
-    <div class="section-heading spots-heading"><div><p class="eyebrow" data-i="get-out">غيري الجو</p><h2 data-i="popular-spots">أماكن بنحب نجري فيها</h2></div><button class="text-link" data-page="explore"><span data-i="explore-map">استكشفي الخريطة</span> ←</button></div><div class="spot-grid"><button class="spot-card" data-spot="النيل"><img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=700&h=480&fit=crop" alt="Nile corniche"><span><b>كورنيش النيل</b><small>٨ جريات · ٢.١ كم منك</small></span><i>↙</i></button><button class="spot-card" data-spot="المعادي"><img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=700&h=480&fit=crop" alt="Green park path"><span><b>غابة المعادي</b><small>٥ جريات · ١.٤ كم منك</small></span><i>↙</i></button><button class="spot-card" data-spot="الزمالك"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=700&h=480&fit=crop" alt="Outdoor running spot"><span><b>ممشى الزمالك</b><small>٦ جريات · ٤.٦ كم منك</small></span><i>↙</i></button></div><footer class="footer"><span>© RUNMATE 2025</span><span data-i="footer">اجري على مزاجك. والباقي علينا.</span><span>صنع بحب <b>●</b></span></footer>
-  </section>
-  <section class="page" id="page-explore"><div class="page-heading"><div><p class="eyebrow" data-i="find-your">الطريق بيناديكي</p><h1 data-i="explore-title">اكتشفي جريتك.</h1><p class="subline" data-i="explore-sub">اختاري جَرية على مزاجك، والباقي علينا.</p></div></div><div class="filter-bar"><label class="search-box"><span>⌕</span><input id="search" placeholder="دوري على جَرية، مكان، أو منظم..." aria-label="Search runs"></label><select id="filter-level" aria-label="Difficulty"><option value="all">كل المستويات</option><option>مبتدئة</option><option>متوسطة</option><option>متقدمة</option></select><select id="filter-distance" aria-label="Distance"><option value="all">أي مسافة</option><option value="5">حتى 5 كم</option><option value="10">5–10 كم</option><option value="11">أكثر من 10 كم</option></select><select id="filter-price" aria-label="Price"><option value="all">كل الأسعار</option><option value="free">مجانية</option><option value="paid">مدفوعة</option></select><button class="filter-reset" id="reset-filters">↺</button></div><div class="filter-summary"><span id="result-count">٤ جريات قريبة</span><button id="sort-btn">الأقرب موعداً ↓</button></div><div class="run-grid" id="explore-runs"></div></section>
-  <section class="page" id="page-tickets"><div class="page-heading"><div><p class="eyebrow" data-i="all-set">مكانك محفوظ</p><h1 data-i="tickets-title">تذاكرك.</h1><p class="subline" data-i="tickets-sub">كل جرياتك الجاية في مكان واحد.</p></div></div><div class="ticket-tabs"><button class="active" data-tab="upcoming">الجايّة <span id="upcoming-num">0</span></button><button data-tab="past">السابقة</button></div><div id="ticket-list"></div></section>
-  <section class="page" id="page-chats"><div class="page-heading"><div><p class="eyebrow" data-i="your-people">ناس جريتك</p><h1 data-i="chats-title">المحادثات.</h1><p class="subline" data-i="chats-sub">تواصلي مع صحابك في كل جَرية.</p></div></div><div class="chat-layout"><div class="chat-list" id="chat-list"></div><div class="chat-detail" id="chat-detail"><div class="empty-chat"><span>◌</span><h3>الجري أحلى مع صحاب</h3><p>احجزي مكانك في جَرية عشان تدخلي جروب المشاركين.</p></div></div></div></section>
-  <section class="page" id="page-profile"><div class="page-heading"><div><p class="eyebrow">RUNMATE MEMBER</p><h1>حسابي.</h1></div><button class="outline-btn" id="edit-profile">تعديل الملف</button></div><div class="profile-card"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=240&h=240&fit=crop&crop=faces" alt="Sarah Ahmed"><div><span class="member-tag">✦ RUNMATE MEMBER</span><h2>سارة أحمد</h2><p>عدّاءة صباحية · المعادي، القاهرة</p><p class="bio">بحب أبدأ يومي بدري وأكتشف طرق جديدة. مستوايا مبتدئ وهدفي أول ١٠ كم 🏃‍♀️</p></div><div class="profile-stats"><span><b id="run-total">0</b><small>جَرية</small></span><span><b>٠٨:١٥</b><small>متوسط الوتيرة</small></span><span><b>٤٢ كم</b><small>المسافة الكلية</small></span></div></div><div class="section-heading"><div><p class="eyebrow">KEEP MOVING</p><h2>تفضيلات الجري</h2></div></div><div class="preference-grid"><div class="preference"><span>مستوى الخبرة</span><b>🌱 مبتدئة</b></div><div class="preference"><span>المسافة المفضّلة</span><b>↗ ٥ كم</b></div><div class="preference"><span>وقت الجري</span><b>☼ الصباح بدري</b></div></div><button class="outline-btn auth-trigger">تسجيل الدخول / إنشاء حساب</button></section>
-  <section class="page" id="page-organizer"><div class="page-heading"><div><p class="eyebrow">RUNMATE ORGANIZER</p><h1>نظّمي جَرية.</h1><p class="subline">اعملي مساحة جديدة للناس اللي بتحب تجري.</p></div><span class="demo-badge">معاينة المنظم</span></div><div class="organizer-panel"><div class="organizer-note"><span>✦</span><div><b>خلي جريتك الجاية مميزة</b><p>أضيفي التفاصيل ومكان التجمع، وحددي عدد المشاركين.</p></div></div><form id="organizer-form" class="organizer-form"><label>اسم الجَرية<input required placeholder="مثال: جَرية شروق المعادي"></label><div class="form-row"><label>التاريخ<input type="date" required></label><label>وقت البداية<input type="time" required></label></div><label>مكان التجمع<input required placeholder="مثال: مدخل حديقة المعادي"></label><div class="form-row"><label>المسافة (كم)<input type="number" min="1" value="5" required></label><label>المقاعد المتاحة<input type="number" min="1" value="15" required></label></div><label>المستوى<select><option>مبتدئة</option><option>متوسطة</option><option>متقدمة</option></select></label><button class="primary-btn" type="submit">＋ إنشاء الجَرية</button><small>حفظ الجريات والنشر الحقيقي يحتاج إعداد Supabase. الإضافة هنا للمعاينة فقط.</small></form></div></section>
-  </main>
-  <nav class="mobile-nav" aria-label="Mobile navigation"><button class="active" data-page="home"><span>⌂</span><small>الرئيسية</small></button><button data-page="explore"><span>⌕</span><small>اكتشف</small></button><button data-page="tickets"><span>▣</span><small>تذاكري</small></button><button data-page="chats"><span>▤</span><small>الشات</small></button><button data-page="profile"><span>◉</span><small>حسابي</small></button></nav>
-</div>
-<div class="modal-backdrop" id="modal" aria-hidden="true"><section class="event-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" id="modal-close" aria-label="Close">×</button><div id="modal-content"></div></section></div><div class="toast" id="toast" role="status"></div>
-<script src="app.js"></script><script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));</script>
-</body></html>
+:root {
+  --bg: #101311;
+  --panel: #161a17;
+  --panel-hover: #1f2420;
+  --border: rgba(255, 255, 255, 0.08);
+  --lime: #ccff00;
+  --lime-glow: rgba(204, 255, 0, 0.15);
+  --text: #f3f4f6;
+  --muted: #9ca3af;
+  --radius: 16px;
+  --font: 'IBM Plex Sans Arabic', 'DM Sans', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.5; overflow-x: hidden; }
+
+.app-shell { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 280px;
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.brand { font-size: 1.4rem; font-weight: 800; text-decoration: none; color: #fff; display: flex; align-items: center; gap: 8px; }
+.brand-mark { background: var(--lime); color: #000; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; font-weight: 900; }
+.brand-dot { color: var(--lime); }
+.side-label { font-size: 0.75rem; text-transform: uppercase; color: var(--muted); margin: 32px 0 12px; letter-spacing: 1px; }
+
+.side-nav { display: flex; flex-direction: column; gap: 6px; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+  text-align: right;
+  width: 100%;
+}
+.nav-item:hover, .nav-item.active { background: var(--panel-hover); color: #fff; }
+.nav-item.active { border-right: 3px solid var(--lime); }
+.nav-count { background: var(--lime); color: #000; font-style: normal; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-right: auto; }
+
+.sidebar-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 16px; }
+.weather-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
+.weather-card .sun { font-size: 1.5rem; color: #facc15; }
+.language-btn { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 8px; border-radius: 8px; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.side-user { display: flex; align-items: center; gap: 12px; }
+.side-user img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.side-user div { display: flex; flex-direction: column; font-size: 0.85rem; }
+.dots { background: none; border: none; color: var(--muted); margin-right: auto; cursor: pointer; font-size: 1.2rem; }
+
+.main { margin-right: 280px; flex: 1; padding: 32px; max-width: 1200px; }
+
+.topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+.mobile-brand { display: none; background: none; border: none; color: #fff; font-weight: 800; font-size: 1.2rem; }
+.crumb { color: var(--muted); font-size: 0.9rem; display: flex; gap: 8px; }
+.crumb-slash { opacity: 0.3; }
+.top-actions { display: flex; align-items: center; gap: 12px; }
+.icon-btn { background: var(--panel); border: 1px solid var(--border); color: #fff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; position: relative; }
+.notification-btn i { position: absolute; top: 10px; right: 10px; width: 8px; height: 8px; background: var(--lime); border-radius: 50%; }
+.top-avatar { background: none; border: none; cursor: pointer; display: none; }
+.top-avatar img { width: 36px; height: 36px; border-radius: 50%; }
+
+.page { display: none; }
+.page.active { display: block; }
+
+.eyebrow { font-size: 0.8rem; color: var(--lime); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.live-dot { width: 8px; height: 8px; background: var(--lime); border-radius: 50%; box-shadow: 0 0 8px var(--lime); }
+.subline { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
+
+.welcome-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
+.primary-btn { background: var(--lime); color: #000; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 700; font-family: inherit; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
+.primary-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+.hero { position: relative; height: 360px; border-radius: var(--radius); overflow: hidden; margin-bottom: 32px; }
+.hero img { width: 100%; height: 100%; object-fit: cover; }
+.hero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(16,19,17,0.95) 100%); }
+.hero-tag { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; border: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+.hero-content { position: absolute; bottom: 24px; right: 24px; left: 24px; }
+.hero-kicker { font-size: 0.85rem; color: var(--lime); margin-bottom: 4px; }
+.hero-title { font-size: 2rem; line-height: 1.2; margin-bottom: 8px; }
+.hero-desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 16px; }
+.hero-meta { display: flex; gap: 16px; font-size: 0.85rem; margin-bottom: 16px; flex-wrap: wrap; }
+.hero-meta b { color: #fff; }
+.hero-button { background: #fff; color: #000; border: none; padding: 10px 18px; border-radius: 10px; font-weight: 700; font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+.hero-pagination { position: absolute; bottom: 24px; left: 24px; display: flex; gap: 6px; }
+.hero-pagination i { width: 8px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 50%; }
+.hero-pagination i.selected { background: var(--lime); width: 20px; border-radius: 4px; }
+
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+.stat { background: var(--panel); border: 1px solid var(--border); padding: 16px; border-radius: var(--radius); display: flex; align-items: center; gap: 16px; }
+.stat-icon { width: 44px; height: 44px; background: rgba(255,255,255,0.05); border-radius: 12px; display: grid; place-items: center; font-size: 1.2rem; }
+.lime-icon { background: var(--lime-glow); color: var(--lime); }
+.stat small { display: block; color: var(--muted); font-size: 0.75rem; }
+.stat strong { font-size: 1.2rem; display: flex; align-items: baseline; gap: 6px; }
+
+.section-heading { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
+.heading-count { font-size: 0.9rem; color: var(--muted); font-weight: normal; }
+.text-link { background: none; border: none; color: var(--lime); font-family: inherit; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+
+.run-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 32px; }
+.run-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: 0.2s; }
+.run-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+.card-thumb { height: 160px; position: relative; }
+.card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.card-badge { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; }
+.card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+.card-body h3 { font-size: 1.1rem; margin-bottom: 6px; }
+.card-meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 16px; display: flex; flex-direction: column; gap: 4px; }
+.card-footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 12px; }
+.card-price { font-weight: 700; font-size: 0.95rem; }
+.card-price.free { color: var(--lime); }
+.card-btn { background: rgba(255,255,255,0.08); color: #fff; border: none; padding: 6px 14px; border-radius: 8px; font-family: inherit; font-size: 0.85rem; cursor: pointer; }
+
+.spots-heading { margin-top: 40px; }
+.spot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+.spot-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; position: relative; height: 120px; padding: 0; cursor: pointer; text-align: right; }
+.spot-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.3s; }
+.spot-card:hover img { opacity: 0.8; transform: scale(1.05); }
+.spot-card span { position: absolute; bottom: 12px; right: 12px; left: 12px; z-index: 2; display: flex; flex-direction: column; }
+.spot-card small { color: var(--muted); font-size: 0.75rem; }
+.spot-card i { position: absolute; top: 12px; left: 12px; z-index: 2; font-style: normal; color: var(--lime); }
+
+.filter-bar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.search-box { flex: 1; min-width: 200px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; padding: 0 12px; gap: 8px; }
+.search-box input { background: none; border: none; color: #fff; font-family: inherit; width: 100%; padding: 10px 0; outline: none; }
+.filter-bar select { background: var(--panel); border: 1px solid var(--border); color: #fff; padding: 0 12px; border-radius: 10px; font-family: inherit; outline: none; cursor: pointer; }
+.filter-reset { background: var(--panel); border: 1px solid var(--border); color: var(--muted); width: 40px; border-radius: 10px; cursor: pointer; }
+.filter-summary { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+.filter-summary button { background: none; border: none; color: var(--muted); font-family: inherit; cursor: pointer; }
+
+.ticket-tabs { display: flex; gap: 12px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+.ticket-tabs button { background: none; border: none; color: var(--muted); font-family: inherit; padding: 12px 16px; font-size: 1rem; cursor: pointer; border-bottom: 2px solid transparent; }
+.ticket-tabs button.active { color: var(--lime); border-bottom-color: var(--lime); }
+.ticket-tabs span { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 8px; font-size: 0.75rem; }
+
+.chat-layout { display: grid; grid-template-columns: 280px 1fr; gap: 20px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); min-height: 400px; overflow: hidden; }
+.chat-list { border-left: 1px solid var(--border); padding: 12px; }
+.chat-item { display: flex; gap: 12px; padding: 12px; border-radius: 10px; cursor: pointer; transition: 0.2s; }
+.chat-item:hover, .chat-item.active { background: var(--panel-hover); }
+.chat-item img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.chat-detail { padding: 24px; display: grid; place-items: center; text-align: center; color: var(--muted); }
+
+.profile-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; display: flex; gap: 24px; align-items: center; margin-bottom: 32px; }
+.profile-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; }
+.member-tag { font-size: 0.75rem; color: var(--lime); font-weight: 700; }
+.bio { color: var(--muted); font-size: 0.9rem; margin-top: 8px; }
+.profile-stats { margin-right: auto; display: flex; gap: 24px; border-right: 1px solid var(--border); padding-right: 24px; }
+.profile-stats span { text-align: center; }
+.profile-stats b { display: block; font-size: 1.2rem; }
+.profile-stats small { color: var(--muted); font-size: 0.75rem; }
+
+.preference-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.preference { background: var(--panel); border: 1px solid var(--border); padding: 16px; border-radius: var(--radius); }
+.preference span { display: block; color: var(--muted); font-size: 0.8rem; margin-bottom: 4px; }
+
+.organizer-panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; max-width: 600px; }
+.organizer-note { display: flex; gap: 12px; background: rgba(204,255,0,0.05); border: 1px solid var(--lime-glow); padding: 16px; border-radius: 12px; color: var(--lime); margin-bottom: 20px; font-size: 0.9rem; }
+.organizer-note p { color: var(--text); font-size: 0.85rem; }
+.organizer-form { display: flex; flex-direction: column; gap: 16px; }
+.organizer-form label { display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: var(--muted); }
+.organizer-form input, .organizer-form select { background: var(--bg); border: 1px solid var(--border); padding: 10px 12px; border-radius: 8px; color: #fff; font-family: inherit; outline: none; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.demo-badge { background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; color: var(--muted); }
+
+.outline-btn { background: transparent; border: 1px solid var(--border); color: #fff; padding: 8px 16px; border-radius: 8px; font-family: inherit; cursor: pointer; }
+.footer { border-top: 1px solid var(--border); padding-top: 24px; margin-top: 40px; display: flex; justify-content: space-between; color: var(--muted); font-size: 0.8rem; }
+
+.mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel); border-top: 1px solid var(--border); padding: 8px 0; z-index: 100; justify-content: space-around; }
+.mobile-nav button { background: none; border: none; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 2px; font-family: inherit; font-size: 0.75rem; }
+.mobile-nav button.active { color: var(--lime); }
+
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); z-index: 200; display: none; place-items: center; padding: 20px; }
+.modal-backdrop.active { display: grid; }
+.event-modal { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); width: 100%; max-width: 500px; position: relative; overflow: hidden; max-height: 90vh; overflow-y: auto; }
+.modal-close { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.5); color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; z-index: 10; }
+
+.toast { position: fixed; bottom: 20px; left: 20px; background: var(--lime); color: #000; padding: 12px 20px; border-radius: 10px; font-weight: 700; transform: translateY(100px); opacity: 0; transition: 0.3s; z-index: 300; }
+.toast.active { transform: translateY(0); opacity: 1; }
+
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-right: 0; padding: 16px; padding-bottom: 80px; }
+  .mobile-brand { display: flex; align-items: center; gap: 8px; }
+  .top-avatar { display: block; }
+  .mobile-nav { display: flex; }
+  .stats-row, .spot-grid, .preference-grid { grid-template-columns: 1fr; }
+  .profile-card { flex-direction: column; text-align: center; }
+  .profile-stats { border-right: none; border-top: 1px solid var(--border); padding-right: 0; padding-top: 16px; width: 100%; justify-content: space-around; }
+  .chat-layout { grid-template-columns: 1fr; }
+  .chat-detail { display: none; }
+}
